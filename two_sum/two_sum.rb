@@ -1,29 +1,11 @@
 # frozen_string_literal: true
 
 def two_sum(nums, target)
-  indices = []
-
   nums.each_with_index do |current, index|
-    result = 0
-    i = 1
+    nums[index] = nil
 
-    loop do
-      next_pointer_index = index + i
-      next_pointer_value = nums[next_pointer_index]
+    missing_addend_index = nums.find_index(target - current)
 
-      current_values_add = (current + next_pointer_value)
-
-      indices = [index, next_pointer_index]
-      result = current_values_add == target
-
-      break if result
-      break if next_pointer_index == nums.length - 1
-
-      i += 1
-    end
-
-    break if result
+    return [index, missing_addend_index] if missing_addend_index
   end
-
-  indices
 end
